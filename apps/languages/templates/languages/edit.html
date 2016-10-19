@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Page</title>
+</head>
+<body>
+  <h1>Let's edit {{language.name}}</h1>
+  <form action="{% url 'edit' id=language.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" value="{{language.name}}">
+    <input type="submit" value="Update">
+  </form>
+</body>
+</html>
