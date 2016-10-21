@@ -15,15 +15,13 @@ def create (request):
         result = Language.objects.validate_language(name=request.POST['name'])
         print result
         if result[0]:
-            return redirect(reverse('index'))
+            return redirect(reverse('languages:index'))
         else:
-            print "+============"
             for message in result[1]:
                 messages.error(request, message)
-            return redirect(reverse('new'))
-            # we have errors we need to get back out to the 'new' template
+            return redirect(reverse('languages:new'))
     else:
-        return redirect(reverse('index'))
+        return redirect(reverse('languages:index'))
 
 def show (request, id):
     language = Language.objects.get(id=id)
@@ -45,9 +43,9 @@ def update (request, id):
             language.name = request.POST['name']
             print language.name
             language.save()
-            return redirect(reverse('show', kwargs={'id':id}))
+            return redirect(reverse('languages:show', kwargs={'id':id}))
     else:
-        return redirect(reverse('edit', kwargs={'id':id})) #Gosh, I want to send them back to the specific language's edit page!
+        return redirect(reverse('languages:edit', kwargs={'id':id})) #Gosh, I want to send them back to the specific language's edit page!
 
 def delete (request, id):
     pass
