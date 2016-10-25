@@ -6,6 +6,15 @@
 </head>
 <body>
   <h1>{{language.name}} Show Page</h1>
-  <a href="{% url 'index' %}">Home</a>
+  <a href="{% url 'languages:index' %}">Home</a>
+  <table>
+    <th>Users Who Like This</th>
+    {% for user in liking_users %}
+    <tr>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{% url 'languages:like' id=language.id %}"><button>Like</button></a>
 </body>
 </html>

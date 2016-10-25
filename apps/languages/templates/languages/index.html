@@ -6,7 +6,8 @@
 </head>
 <body>
   <h1>Languages Page!</h1>
-  <a href="{% url 'new' %}">Add a Language</a>
+  <a href="{% url 'users:logout' %}">Logout</a>
+  <a href="{% url 'languages:new' %}">Add a Language</a>
   <table>
     <thead>
       <th>Name</th>
@@ -15,8 +16,8 @@
     <tbody>
       {% for language in languages %}
       <tr>
-        <td><a href="{% url 'show' id=language.id %}">{{language.name}}</a></td>
-        <td><a href="{% url 'edit' id=language.id %}">Edit</a> | <a href="{% url 'destroy' id=language.id %}">Delete</a></td>
+        <td><a href="{% url 'languages:show' id=language.id %}">{{language.name}}</a></td>
+        <td><a href="{% url 'languages:edit' id=language.id %}">Edit</a> | <a href="{% url 'languages:destroy' id=language.id %}">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>

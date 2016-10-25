@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Create a Language</h1>
-  <form action="{% url 'create' %}" method="post">
+  <form action="{% url 'languages:create' %}" method="post">
     {% csrf_token %}
     <input type="text" name="name" placeholder="Language Name...">
     <input type="submit" value="Create">

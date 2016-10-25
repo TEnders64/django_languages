@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from .models import Language
+from ..loginreg.models import User
 # Create your views here.
 def index (request):
     languages = Language.objects.all()
@@ -25,8 +26,10 @@ def create (request):
 
 def show (request, id):
     language = Language.objects.get(id=id)
+    liking_users = language.users.all()
     print language
-    return render(request, 'languages/show.html', {'language':language})
+    print liking_users
+    return render(request, 'languages/show.html', {'language':language, 'liking_users': liking_users})
 
 def edit (request, id):
     language = Language.objects.get(id=id)
@@ -49,3 +52,10 @@ def update (request, id):
 
 def delete (request, id):
     pass
+
+def like (request, id):
+    user = User.objects.get(id=request.session['user_id'])
+    lang = Language.objects.get(id=id)
+    lang.users.add(user)
+    lang.save()
+    return redirect(reverse('languages:show', kwargs={'id':id}))
